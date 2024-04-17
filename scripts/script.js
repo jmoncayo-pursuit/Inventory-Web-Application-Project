@@ -1,91 +1,59 @@
-import {books} from '../Data/bookData.js';
-console.log(books);
-books.new = '22';
-console.log(books);
+// script.js
 
+document.addEventListener('DOMContentLoaded', () => {
+    const form = document.querySelector('.submit-box');
+    const listContainer = document.getElementById('list-container');
 
-//in stock text changer
-const stockInputText = document.getElementById('stock');
-const stockIcon = document.getElementById('check');
+    form.addEventListener('submit', (event) => {
+        event.preventDefault();
 
-stockIcon.addEventListener('click',()=>{
-    if(stockInputText.value=='In Stock'){
-        stockInputText.value = 'Out of Stock'
-        stockIcon.classList.remove('fa-check');
-        stockIcon.classList.add('fa-xmark')
-        stockIcon.style.color= "#A52B2B";
-    }else{
-        stockInputText.value = 'In Stock'
-        stockIcon.classList.remove('fa-xmark');
-        stockIcon.classList.add('fa-check')
-        stockIcon.style.color= "#3B923B";
-    }   
-});
+        const title = document.getElementById('title').value;
+        const author = document.getElementById('author').value;
+        const imageURL = document.getElementById('image-URL').value;
+        const price = document.getElementById('price').value;
+        const stock = document.getElementById('stock').value;
 
-// data from form
-const formTitleInput = document.getElementById('title');
-const formAuthorInput = document.getElementById('author');
-const formUrlInput = document.getElementById('image-URL');
-const formPriceInput = document.getElementById('price');
+        const newBookItem = document.createElement('li');
+        newBookItem.classList.add('books__item');
 
-//getting a base book elemt and remove it from the web
-const listContainer = document.getElementById('list-container');
-const InitialbookItem = document.querySelector('.books__item');
-const bookItem = InitialbookItem.cloneNode(true);
-InitialbookItem.remove();
+        newBookItem.innerHTML = `
+            <img alt=" :) book pic here" src="${imageURL}">
+            <div class="books__description">
+                <h3 class="books__item__title">${title}</h3>
+                <h4 class="books__item__author">${author}</h4>
+                <h6 class="books__item__stock">${stock}</h6>
+                <p class="books__item__price">${price}</p>
+                <i class="fa-solid fa-trash-can"></i>
+            </div>
+        `;
 
-//importing data from Data file
+        if (stock === 'In Stock') {
+            newBookItem.querySelector('.books__item__stock').classList.add('in-stock');
+        } else {
+            newBookItem.querySelector('.books__item__stock').classList.add('out-of-stock');
+        }
 
+        listContainer.appendChild(newBookItem);
 
-// function that all a book item base on the input boxes
-function addBook (){
-    const newBook= bookItem.cloneNode(true);
+        form.reset();
 
-    newBook.querySelector('.books__item__title').innerText = formTitleInput.value;
-    newBook.querySelector('.books__item__author').innerText = formAuthorInput.value;
-    newBook.querySelector('img').src = formUrlInput.value;
+        const successText = document.querySelector('.success-text');
+        successText.style.visibility = 'visible';
 
+        setTimeout(() => {
+            successText.style.visibility = 'hidden';
+        }, 3000);
 
-    if(stockInputText.value!='In Stock'){
-        const outOfStockText = newBook.querySelector('.books__item__stock');
-        outOfStockText.innerText = "out of stock";
-        outOfStockText.style.background = '#A52B2B';
-        outOfStockText.style.width = '60px';
-    }
-    const formatPrice = '$'+formPriceInput.value;
-    newBook.querySelector('.books__item__price').innerText = formatPrice;
-
-    
-
-    //Trash Can action
-    const trashIcon = newBook.querySelector('.fa-trash-can');
-
-    trashIcon.addEventListener('click',()=>{
-        trashIcon.parentElement.remove();
+        const trashIcon = newBookItem.querySelector('.fa-trash-can');
+        trashIcon.addEventListener('click', () => {
+            newBookItem.remove();
+        });
     });
 
-    listContainer.appendChild(newBook);
-
-}
-
-// action when submit
-const form= document.querySelector('.submit-box');
-const successText = document.querySelector('.success-text');
-
-form.addEventListener('submit',(event)=>{
-    event.preventDefault();
-    successText.style.visibility = 'visible';
-    
-    addBook();
-    formTitleInput.value='';
-    formAuthorInput.value='';
-    formUrlInput.value='';
-    formPriceInput.value='';
-
-    stockInputText.value = 'In Stock'
-    stockIcon.classList.remove('fa-xmark');
-    stockIcon.classList.add('fa-check')
-    stockIcon.style.color= "#3B923B";
-
-    
+    listContainer.addEventListener('click', (event) => {
+        if (event.target.classList.contains('fa-trash-can')) {
+            const parentListItem = event.target.closest('.books__item');
+            parentListItem.remove();
+        }
+    });
 });

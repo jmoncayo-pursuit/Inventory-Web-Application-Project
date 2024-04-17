@@ -1,4 +1,6 @@
+/* styles/style.css */
 @import url("https://fonts.googleapis.com/css2?family=Fanwood+Text:ital@0;1&display=swap");
+
 body {
   display: flex;
   justify-content: center;
@@ -16,20 +18,27 @@ body {
 .submit-box {
   margin-top: 50px;
   display: grid;
-  padding: 20px;
-  border-right: 1px solid #00254E;
+  padding: 2em;
+  font-size: .5em;
+  border-left: 2px solid #00254E;
 }
 
 .submit-box__input-box {
   background-color: white;
-  font-size: 25px;
+  font-size: 1.5em;
   border: none;
   border-bottom: 2px solid #00254E;
-  width: 300px;
+  width: 15em;
   height: 30px;
-  margin: 12px;
+  margin: .5em;
+  justify-self: center;
   text-underline-position: -10px;
   padding-left: 3px;
+  margin-left: 1em;
+}
+
+.submit-box__input-box::placeholder {
+  color: hsl(38, 5%, 71%);
 }
 
 .submit-box__input-box:focus {
@@ -37,51 +46,34 @@ body {
 }
 
 .submit-box__btn {
-  width: 200px;
-  height: 55px;
+  width: 13em;
+  height: 2.5em;
   border: none;
-  font-size: 20px;
+  font-size: 1.5em;
   justify-self: center;
-  border-radius: 25px;
-  background-color: #8EB2D9;
-  color: #00254E;
+  border-radius: 13px;
+  color: white;
+  background-color: #00254E;
   cursor: pointer;
   box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+  margin-top: 1em;
 }
 
 .submit-box__btn:hover {
   background-color: #00254E;
   color: #8EB2D9;
-  box-shadow: rgba(0, 0, 0, 0.2) 0px 60px 40px -7px;
-}
-
-.submit-box i {
-  color: #3B923B;
-  margin-top: -75px;
-  margin-right: 170px;
-  width: 20px;
-  height: 25px;
-  font-size: 25px;
-  align-items: end;
-  justify-self: end;
-  cursor: pointer;
-}
-
-.submit-box i:hover {
-  scale: 1.2;
+  box-shadow: rgba(0, 0, 0, 0.2) 0px 0px 10px 0px;
 }
 
 .success-text {
   visibility: hidden;
-  width: 320px;
-  height: 40px;
-  margin-top: -150px;
-  margin-left: 80px;
-  font-size: 30px;
+  margin-top: 10px;
+  text-align: center;
+  font-size: 18px;
   font-weight: bold;
-  color: #3B923B;
-  text-shadow: 0 2px 1px #8EB2D9;
+  color: hsl(103, 100%, 25%); 
 }
+
 
 .books {
   margin-top: -50px;
@@ -93,9 +85,10 @@ body {
   font-size: 40px;
   font-weight: lighter;
   color: #00254E;
-  margin-left: 0%;
+  margin-left: 25%;
   writing-mode: vertical-lr;
   rotate: 180deg;
+  width: 50px; 
 }
 
 .books__header span {
@@ -103,18 +96,21 @@ body {
 }
 
 .books__container {
-  margin-top: 20px;
-  height: 550px;
-  overflow: auto;
+  height: auto;
+  max-height: 550px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  margin-right: 2em;
+  padding-top: 0; 
 }
 
 .books__container::-webkit-scrollbar {
-  width: 10px;
+  width: 1px;
 }
 
 .books__container::-webkit-scrollbar-thumb {
   border-radius: 8px;
-  background-color: rgba(0, 37, 78, 0.3);
+  background-color: 1px solid #00254E;;
 }
 
 .books__container::-webkit-scrollbar-thumb:hover {
@@ -126,17 +122,23 @@ body {
   display: grid;
   list-style: none;
   grid-template-columns: 100px 300px 50px;
-  padding: 20px;
-  width: 450px;
-  height: 120px;
+  width: 20em;
+  height: 7em;
   border-top: 1px solid #00254E;
   border-bottom: 1px solid #00254E;
   color: #00254E;
-  padding-top: 10px;
+  padding-top: 2em;
+
 }
 
 .books__item img {
-  height: 130px;
+  height: 6em;
+}
+
+.books__item__title {
+  font-size: 1em;
+  margin: 0;
+  max-width: 15em;
 }
 
 .books__item i {
@@ -149,14 +151,15 @@ body {
   margin-top: -10px;
 }
 
+.books__item__title::placeholder,
+.books__item__author::placeholder,
+.books__item__price::placeholder {
+  color: hsl(38, 5%, 71%);
+}
+
 .books__item i:hover {
   scale: 1.5;
   color: #00254E;
-}
-
-.books__item__title {
-  font-size: 25px;
-  margin: 0;
 }
 
 .books__item__author {
@@ -166,24 +169,42 @@ body {
 
 .books__item__stock {
   margin: 0;
-  background: #8EB2D9;
   color: white;
-  font-size: 12px;
+  font-size: 0.5em;
   font-weight: lighter;
-  height: 15px;
-  width: 40px;
-  padding: 1px;
+  height: 1em;
+  width: 5.5em;
+  padding: 5px;
   padding-left: 5px;
   border-radius: 10px;
+  text-align: center;
+  padding-top: 4px;
 }
 
 .books__item__price {
   margin: 0;
-  font-size: 27px;
+  font-size: 1.25em;
   font-weight: bold;
   font-family: Arial, Helvetica, sans-serif;
+  padding-top: .5em;
 }
 
+.books__item__stock.in-stock {
+  background-color: hsl(103, 100%, 25%);
+  color: white;
+}
 
+.books__item__stock.out-of-stock {
+  background-color: hsl(360, 97%, 47%);
+  color: white;
+}
 
-/*# sourceMappingURL=style.scss.map */
+.books__description {
+  position: relative;
+}
+
+.books__description .fa-trash-can {
+  margin-left: 9.5em;
+font-size: 1em; 
+  color: hsl(0, 100%, 0%);
+}
